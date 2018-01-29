@@ -1,14 +1,24 @@
-## jsinspector-react
+import React from 'react'
+import { connect } from 'react-redux'
+import App from '../components/App/App'
 
-A static page to help inspect javascript with browser's dev tools, built with react and redux
+const mapStateToProps = (state) => ({
+  id: state.app.id,
+  selectedEditor: state.app.selectedEditor,
+  isAllBreakpointDisabled: state.app.isAllBreakpointDisabled
+})
 
-## State
-```javascript
+export default connect(
+  mapStateToProps
+)(App)
+
+// The app state will be like this
+/*
 {
   id: String,
   editors: [{
     id: String,
-    filename: String,
+    label: String,
     content: String,
     breakpoints: [{
       isDisabled: Boolean,
@@ -26,10 +36,4 @@ A static page to help inspect javascript with browser's dev tools, built with re
   }],
   isAllBreakpointDisabled: Boolean
 }
-```
-
-## Todo
-- Add library support
-- Add multiple file support
-- Add tests
-- Add performance results
+*/
