@@ -4,7 +4,8 @@ import App from '../components/App/App'
 
 const mapStateToProps = (state) => ({
   id: state.app.id,
-  isBusy: state.app.isBusy
+  isBusy: state.app.isBusy,
+  isConsolePanelVisible: state.app.isConsolePanelVisible
 })
 
 export default connect(

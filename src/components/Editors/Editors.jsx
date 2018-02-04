@@ -1,9 +1,9 @@
 import React from 'react'
 
-import './Editors.scss'
+import './Editors.css'
 import { Tabs, Tab, TabPanel } from '../Tabs/Tabs'
 import Editor from '../Editor/Editor'
-import crossIcon from '../../icons/crossIcon.svg'
+import InteractiveIcon from '../InteractiveIcon/InteractiveIcon'
 
 export default ({
   editors,
@@ -13,13 +13,14 @@ export default ({
   handleEditorChange}) => {
 
   let tabList = editors.map((editor) => {
+
     return (
       <Tab key={editor.id}
         isSelected={editor.id === selectedEditorId}
         handleTabClick={handleTabClick}
         tabId={editor.id}>
-        {editor.label}
-        <img src={crossIcon} className="icon removeIcon" alt="remove" />
+        {editor.filename}
+        <InteractiveIcon iconName='times' />
       </Tab>
     )
   })
@@ -29,7 +30,7 @@ export default ({
       <TabPanel key={editor.id}
         isSelected={editor.id === selectedEditorId}>
         <Editor isAllBreakpointDisabled={isAllBreakpointDisabled}
-          defaultContent={editor.savedContent}
+          content={editor.content}
           breakpoints={editor.breakpoints}
           filename={editor.filename}
           handleEditorChange={(newValue) => {
@@ -41,7 +42,7 @@ export default ({
   })
 
   return (
-    <div className="editors">
+    <div className='editors'>
       <Tabs tabList={tabList} tabPanelList={tabPanelList} />
     </div>
   )

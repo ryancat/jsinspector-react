@@ -17,12 +17,15 @@ export default ({consolePanel}) => {
   }
 
   return (
-    <div className="console description">
-      <div className="toolBar">
-        <button className="secondary toClear"
-          onClick={handleClearConsole}>Clear</button>
+    <div className='consolePanel description'>
+      <div className='consolePanelToolBar'>
+        <button className='secondary toClear'
+          onClick={handleClearConsole}>
+          Clear
+        </button>
+        <input className='searchBox' />
       </div>
-      <div className="content"></div>
+      <div className='consolePanelContent'></div>
     </div>
   )
 }

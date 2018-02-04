@@ -2,14 +2,17 @@ import React from 'react';
 import './App.scss';
 
 import EditorsContainer from '../../containers/EditorsContaienr'
+import ToolBarContainer from '../../containers/ToolBarContainer'
 import ConsolePanelContainer from '../../containers/ConsolePanelContainer'
 
-const App = ({id, isBusy}) => {
+const App = ({id, isBusy, isConsolePanelVisible}) => {
   return (
-    <div id="jsinspectorApp"
+    <div id='jsinspectorApp'
       className={isBusy ? 'busy' : ''}>
-      <EditorsContainer></EditorsContainer>
-      <ConsolePanelContainer></ConsolePanelContainer>
+      <EditorsContainer />
+      <ToolBarContainer />
+      {isConsolePanelVisible ? <ConsolePanelContainer /> : null}
+      
     </div>
     // <div id="jsinspectorApp">
     //   <div class="editors">

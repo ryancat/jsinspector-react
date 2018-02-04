@@ -1,13 +1,13 @@
-import React from 'react';
-import './Tabs.scss';
+import React from 'react'
+import './Tabs.scss'
 
 export const Tabs = ({tabList, tabPanelList}) => {
   return (
-    <div className="tabs">
-      <div className="tabList">
+    <div className='tabs'>
+      <div className='tabList'>
         {tabList}
       </div>
-      <div className="tabPanelList">
+      <div className='tabPanelList'>
         {tabPanelList}
       </div>
     </div>
@@ -27,9 +27,11 @@ export const Tab = ({children, isSelected, tabId, handleTabClick}) => {
 }
 
 export const TabPanel = ({children, isSelected}) => {
-  return (
-    <div className={isSelected ? 'tabPanel selected' : 'tabPanel' }>
+  const renderResult = isSelected ? (
+    <div className='tabPanel'>
       {children}
     </div>
-  )
+  ) : null
+
+  return renderResult
 }

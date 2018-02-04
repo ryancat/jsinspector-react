@@ -3,8 +3,8 @@ import { EDITOR_CONTENT_CHANGED } from "../actions/editorsAction";
 // The actual default state should be an empty array
 const defaultState = [{
   id: 1,
-  label: 'File 1',
-  savedContent: 'aaa',
+  filename: 'File 1',
+  content: 'aaa',
   breakpoints: [{
     isDisabled: false,
     line: 1
@@ -14,8 +14,8 @@ const defaultState = [{
   }]
 }, {
   id: 2,
-  label: 'File 2',
-  savedContent: 'bbb',
+  filename: 'File 2',
+  content: 'bbb',
   breakpoints: [{
     isDisabled: false,
     line: 2
@@ -32,7 +32,7 @@ export default (state = defaultState, action) => {
           editorIndex = state.indexOf(editorState),
           newEditorState = {
             ...editorState,
-            savedContent: action.newValue
+            content: action.newValue
           },
           newState = state.slice()
 
