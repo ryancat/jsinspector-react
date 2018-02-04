@@ -2,28 +2,14 @@ import React from 'react';
 import './App.scss';
 
 import EditorsContainer from '../../containers/EditorsContaienr'
+import ConsolePanelContainer from '../../containers/ConsolePanelContainer'
 
-// class App extends Component {
-//   render() {
-//     return (
-//       <div className="App">
-//         <header className="App-header">
-//           <img src={logo} className="App-logo" alt="logo" />
-//           <h1 className="App-title">Welcome to React</h1>
-//         </header>
-//         <p className="App-intro">
-//           To get started, edit <code>src/App.js</code> and save to reload.
-//         </p>
-//       </div>
-//     );
-//   }
-// }
-
-const App = ({id, selectedEditor, isAllBreakpointDisabled}) => {
+const App = ({id, isBusy}) => {
   return (
-    <div id="jsinspectorApp">
+    <div id="jsinspectorApp"
+      className={isBusy ? 'busy' : ''}>
       <EditorsContainer></EditorsContainer>
-    
+      <ConsolePanelContainer></ConsolePanelContainer>
     </div>
     // <div id="jsinspectorApp">
     //   <div class="editors">

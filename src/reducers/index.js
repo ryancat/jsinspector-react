@@ -7,5 +7,5 @@ export default combineReducers({
   // Reducers go here
   app: appReducer,
   editors: editorsReducer,
-  console: consoleReducer
+  consolePanel: consoleReducer
 })

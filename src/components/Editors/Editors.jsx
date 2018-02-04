@@ -1,82 +1,48 @@
 import React from 'react'
 
-// Import Brace and the AceEditor Component
-import brace from 'brace'
-import AceEditor from 'react-ace'
-
-// Import a Mode (language)
-import 'brace/mode/javascript'
-
-// Import a Theme (okadia, github, xcode etc)
-import 'brace/theme/tomorrow'
-
 import './Editors.scss'
-import Tabs from '../Tabs/Tabs'
+import { Tabs, Tab, TabPanel } from '../Tabs/Tabs'
+import Editor from '../Editor/Editor'
 import crossIcon from '../../icons/crossIcon.svg'
 
-export default ({editors}) => {
-  let tabList = editors.map((editor, index) => {
+export default ({
+  editors,
+  selectedEditorId, 
+  isAllBreakpointDisabled, 
+  handleTabClick, 
+  handleEditorChange}) => {
+
+  let tabList = editors.map((editor) => {
     return (
-      <button className="tab" key={index}>
+      <Tab key={editor.id}
+        isSelected={editor.id === selectedEditorId}
+        handleTabClick={handleTabClick}
+        tabId={editor.id}>
         {editor.label}
         <img src={crossIcon} className="icon removeIcon" alt="remove" />
-      </button>
+      </Tab>
     )
   })
 
-  let tabPanelList = editors.map((editor, index) => {
+  let tabPanelList = editors.map((editor) => {
     return (
-      <AceEditor
-        key={index}
-        mode="javascript"
-        theme="tomorrow"
-        onChange={handleEditorChange}
-        name={editor.filename}
-        editorProps={{
-            $blockScrolling: true
-        }}
-      />
+      <TabPanel key={editor.id}
+        isSelected={editor.id === selectedEditorId}>
+        <Editor isAllBreakpointDisabled={isAllBreakpointDisabled}
+          defaultContent={editor.savedContent}
+          breakpoints={editor.breakpoints}
+          filename={editor.filename}
+          handleEditorChange={(newValue) => {
+            handleEditorChange(editor.id, newValue)
+          }}>
+        </Editor>
+      </TabPanel>
     )
   })
-
-  function handleEditorChange (e) {
-    console.log('editor changed', e)
-  }
 
   return (
     <div className="editors">
       <Tabs tabList={tabList} tabPanelList={tabPanelList} />
     </div>
-    // <div id="jsinspectorApp">
-    //   <div class="editors">
-    //     <div class="editorTabs tabs"></div>
-    //   </div>
-    //   <div class="toolbox">
-    //     <div class="toolbar">
-    //       <div class="toobarItem toolbarBreakpoint">
-    //         <button class="toolbarBreakpointBtn toDisable secondary">Disable All Breakpoints</button>
-    //         <button class="toolbarBreakpointBtn toEnable secondary">Enable All Breakpoints</button>
-    //       </div>
-    //       <div class="toobarItem">
-    //         <button class="toRemoveAll secondary">Remove All Breakpoints</button>
-    //       </div>
-    //     </div>
-    //     <ul class="toolboxBreakpointLines"></ul>
-    //   </div>
-    //   <div class="description">
-    //     <span>Please open your browser's dev tools, as well as active breakpoints</span>
-    //   </div>
-    //   <div class="mainInteraction">
-    //     <button class="inspectBtn primary">Inspect</button>
-    //     <button class="perfBtn primary">Perf Test (3s)</button>
-    //   </div>
-    //   <div class="console" class="description">
-    //     <div class="toolBar">
-    //       <button class="secondary toClear">Clear</button>
-    //       <div class="editorTabs tabs"></div>
-    //     </div>
-    //     <div class="content"></div>
-    //   </div>
-    // </div>
   )
 }

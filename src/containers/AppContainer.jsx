@@ -4,8 +4,7 @@ import App from '../components/App/App'
 
 const mapStateToProps = (state) => ({
   id: state.app.id,
-  selectedEditor: state.app.selectedEditor,
-  isAllBreakpointDisabled: state.app.isAllBreakpointDisabled
+  isBusy: state.app.isBusy
 })
 
 export default connect(
@@ -25,7 +24,7 @@ export default connect(
       line: Number(row)
     }]
   }],
-  selectedEditor: Number(editorId),
+  selectedEditorId: Number(editorId),
   consoleLogs: [{
     timestamp: Number,
     chunks: [{
@@ -34,6 +33,7 @@ export default connect(
       type: String('ERROR', 'LOG', 'PERF', 'TEST')
     }]
   }],
-  isAllBreakpointDisabled: Boolean
+  isAllBreakpointDisabled: Boolean,
+  isBusy: Boolean
 }
 */

@@ -1,13 +1,16 @@
 // const defaultState = [{
 //   timestamp: Number,
-//   chunks: [{
+//   logs: [{
 //     editorId: String,
+//     line: Number,
 //     content: String,
 //     type: String('ERROR', 'LOG', 'PERF', 'TEST')
 //   }]
 // }]
 
-export default (state = [], action) => {
+const defaultState = []
+
+export default (state = defaultState, action) => {
   switch (action.type) {
     default:
       return state
