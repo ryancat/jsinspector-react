@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 import Editors from '../components/Editors/Editors'
 import { selectEditorById, editorChanged } from '../actions/editorsAction'

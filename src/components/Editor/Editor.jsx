@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
+import {debounce} from 'lodash'
+
 // Import Brace and the AceEditor Component
 import brace from 'brace'
 import AceEditor from 'react-ace'
@@ -17,7 +19,7 @@ export default ({filename, content, breakpoints, handleEditorChange}) => {
     <AceEditor
       mode='javascript'
       theme='tomorrow'
-      onChange={handleEditorChange}
+      onChange={debounce(handleEditorChange, 300)}
       name={filename}
       value={content}
       editorProps={{

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 
 import './Editors.css'
 import { Tabs, Tab, TabPanel } from '../Tabs/Tabs'

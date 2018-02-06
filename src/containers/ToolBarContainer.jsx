@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 import ToolBar from '../components/ToolBar/ToolBar'
 import { toggleConsolePanel, addConsoleLog } from '../actions/appAction'
@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
    * - Will dispatch add log action to store
    */
   handleConsoleAddLog: (editor, consoleLogType, message) => {
-    dispatch(addConsoleLog(editor, consoleLogType, message))
+    dispatch(addConsoleLog(editor, consoleLogType, message + ''))
   }
 })
 
