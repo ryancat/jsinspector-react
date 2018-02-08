@@ -1,7 +1,7 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux'
 import Editors from '../components/Editors/Editors'
-import { selectEditorById, editorChanged } from '../actions/editorsAction'
+import { selectEditorById, editorChanged, closeEditorTab } from '../actions/editorsAction'
 
 const mapStateToProps = (state) => ({
   editors: state.editors,
@@ -26,6 +26,17 @@ const mapDispatchToProps = (dispatch) => ({
    */
   handleEditorChange: (editorId, newValue) => {
     dispatch(editorChanged(editorId, newValue))
+  },
+
+  /**
+   * Handle close editor tab, which will remove it from store
+   * TODO: We may not delete it from store as this could be an
+   * accidental operation
+   * 
+   * - Will dispatch close editor tab action to store
+   */
+  handleCloseTab: (editorId) => {
+    dispatch(closeEditorTab(editorId))
   }
 })
 

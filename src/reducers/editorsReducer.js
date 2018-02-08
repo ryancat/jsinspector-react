@@ -1,4 +1,6 @@
-import { EDITOR_CONTENT_CHANGED } from "../actions/editorsAction";
+import produce from 'immer'
+
+import { EDITOR_CONTENT_CHANGED, CLOSE_EDITOR_TAB } from "../actions/editorsAction";
 
 // The actual default state should be an empty array
 const defaultState = [{
@@ -28,16 +30,28 @@ const defaultState = [{
 export default (state = defaultState, action) => {
   switch (action.type) {
     case EDITOR_CONTENT_CHANGED:
-      let editorState = state.find(editor => editor.id === action.editorId),
-          editorIndex = state.indexOf(editorState),
-          newEditorState = {
-            ...editorState,
-            content: action.newValue
-          },
-          newState = state.slice()
+      return produce(state, draftState => {
+        let changedEditor = draftState.find(editor => editor.id === action.editorId)
 
-      newState.splice(editorIndex, 1, newEditorState)
-      return newState
+        if (!changedEditor) {
+          return
+        }
+
+        changedEditor.content = action.newValue
+      })
+
+    case CLOSE_EDITOR_TAB:
+      return produce(state, draftState => {
+        let closedEditor = draftState.find(editor => editor.id === action.editorId),
+            editorIndex = draftState.indexOf(closedEditor)
+
+        if (!closedEditor) {
+          return
+        }
+
+        draftState.splice(editorIndex, 1)
+      })
+      
     default:
       return state
   }

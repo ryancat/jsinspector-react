@@ -1,10 +1,14 @@
 import React from 'react' // eslint-disable-line no-unused-vars
-import './ToolBar.scss'
+
+import styled from 'styled-components'
+import {color} from '../../styles/color'
 
 import InteractiveIcon from '../InteractiveIcon/InteractiveIcon'
+import InteractiveButton from '../InteractiveButton/InteractiveButton'
 import consoleLogType from '../../enums/consoleLogType'
 
-export default ({
+export default styled(({
+  className,
   isConsolePanelVisible, 
   editors, 
   handleToggleConsolePanel,
@@ -45,12 +49,10 @@ export default ({
         handleConsoleAddLog(editor, consoleLogType.ERROR, e.message)
       }
     })
-
-
   }
   
   return (
-    <div className='toolBar'>
+    <div className={className}>
       {/* The toggle console panel visiblility icon */}
       {isConsolePanelVisible ? (
         <InteractiveIcon iconName='chevron-circle-down' 
@@ -62,10 +64,14 @@ export default ({
         />
       )}
       
-      <button className="toolBarButton"
-        onClick={handleInspectBtnClick}>
+      <InteractiveButton 
+        handleClick={handleInspectBtnClick}>
         Inspect
-      </button>
+      </InteractiveButton>
     </div>
   )
-}
+})`
+  border: 1px solid ${color.border};
+  border-top: none;
+  padding: 5px;
+`

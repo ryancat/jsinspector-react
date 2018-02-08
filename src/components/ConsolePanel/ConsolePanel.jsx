@@ -1,8 +1,11 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 import {debounce} from 'lodash'
 
+import styled from 'styled-components'
+import {color} from '../../styles/color'
+
 import LabelText from '../LabelText/LabelText'
-import './ConsolePanel.scss'
+import InteractiveButton from '../InteractiveButton/InteractiveButton'
 
 // {
 //   timestamp: Number,
@@ -13,7 +16,7 @@ import './ConsolePanel.scss'
 //     type: String('ERROR', 'LOG', 'PERF', 'TEST')
 //   }]
 // }
-export default class ConsolePanel extends React.Component{
+class ConsolePanel extends React.Component{
 
   constructor () {
     super()
@@ -24,12 +27,7 @@ export default class ConsolePanel extends React.Component{
       searchText: ''
     }
 
-    this.handleClearConsoleLog = this.handleClearConsoleLog.bind(this)
     this.handleSearchConsoleLog = this.handleSearchConsoleLog.bind(this)
-  }
-
-  handleClearConsoleLog (e) {
-    console.log('clicked')
   }
 
   handleSearchConsoleLog () {
@@ -57,12 +55,12 @@ export default class ConsolePanel extends React.Component{
           })
   
     return (
-      <div className='consolePanel description'>
+      <div className={this.props.className}>
         <div className='consolePanelToolBar'>
-          <button className='secondary toClear'
-            onClick={this.handleClearConsoleLog}>
+          <InteractiveButton
+            handleClick={this.props.handleClearConsoleLog}>
             Clear
-          </button>
+          </InteractiveButton>
           <input className='searchBox' 
             onKeyUp={debounce(this.handleSearchConsoleLog, 300)}
             ref='consoleLogSearch'
@@ -75,3 +73,25 @@ export default class ConsolePanel extends React.Component{
     )
   }
 } 
+
+export default styled(ConsolePanel)`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid ${color.border};
+  border-top: none;
+  padding: 5px;
+  overflow: hidden;
+  max-height: 50%;
+  transition: height 0.3s;
+
+  .consolePanelToolBar {
+    border-bottom: 1px solid ${color.border};
+    padding: 5px;
+  }
+
+  .consolePanelContent {
+    flex-grow: 1;
+    min-height: 50px;
+    overflow: scroll;
+  }
+`

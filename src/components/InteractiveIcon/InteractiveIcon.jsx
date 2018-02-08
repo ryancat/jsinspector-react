@@ -1,14 +1,18 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 
 import SvgIcon from '../SvgIcon/SvgIcon'
-import './InteractiveIcon.css'
+import styled from 'styled-components'
 
-export default ({iconName, iconStyle, handleClick}) => {
+export default styled(({className, iconName, iconStyle, handleClick}) => {
   return (
-    <span className='interactiveIcon'
+    <span className={className}
       onClick={handleClick}
     >
       <SvgIcon name={iconName} iconStyle={iconStyle} />
     </span>
   )
-}
+})`
+  position: relative;
+  padding: 0 5px;
+  cursor: pointer;
+`

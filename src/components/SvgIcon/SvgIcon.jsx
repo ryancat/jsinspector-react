@@ -1,12 +1,17 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 
-import './SvgIcon.css'
+import styled from 'styled-components'
 
-export default ({name, iconStyle}) => {
+export default styled(({className, name, iconStyle}) => {
   return (
     <img src={require(`../../icons/${name}.svg`)} 
-      className='svgIcon removeIcon' 
-      style={iconStyle}
+      className={className} 
       alt='remove' />
   )
-}
+})`
+  position: relative;
+  top: 2px;
+  width: 13px;
+  height: 13px;
+  ${props => props.iconStyle}
+`

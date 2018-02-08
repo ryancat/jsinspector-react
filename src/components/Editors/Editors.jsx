@@ -1,26 +1,29 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 
-import './Editors.css'
+import styled from 'styled-components'
+
 import { Tabs, Tab, TabPanel } from '../Tabs/Tabs'
 import Editor from '../Editor/Editor'
-import InteractiveIcon from '../InteractiveIcon/InteractiveIcon'
 
-export default ({
+export default styled(({
+  className,
   editors,
   selectedEditorId, 
   isAllBreakpointDisabled, 
   handleTabClick, 
-  handleEditorChange}) => {
+  handleEditorChange,
+  handleCloseTab}) => {
 
-  let tabList = editors.map((editor) => {
+  let tabList = editors.map((editor, editorIndex) => {
 
     return (
       <Tab key={editor.id}
         isSelected={editor.id === selectedEditorId}
         handleTabClick={handleTabClick}
-        tabId={editor.id}>
+        handleCloseTab={handleCloseTab}
+        tabId={editor.id}
+        tabIndex={editorIndex}>
         {editor.filename}
-        <InteractiveIcon iconName='times' />
       </Tab>
     )
   })
@@ -42,8 +45,12 @@ export default ({
   })
 
   return (
-    <div className='editors'>
-      <Tabs tabList={tabList} tabPanelList={tabPanelList} />
-    </div>
+    <Tabs className={className} 
+      tabList={tabList} 
+      tabPanelList={tabPanelList} />
   )
-}
+})`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`

@@ -12,6 +12,7 @@ import produce from 'immer'
 
 import consoleLogType from '../enums/consoleLogType'
 import { ADD_CONSOLE_LOG } from '../actions/appAction';
+import { CLEAR_CONSOLE_LOG } from '../actions/consolePanelAction';
 
 const defaultState = {
   logs: []
@@ -27,6 +28,11 @@ export default (state = defaultState, action) => {
           content: action.message,
           type: action.consoleLogType
         })
+      })
+
+    case CLEAR_CONSOLE_LOG:
+      return produce(state, draftState => {
+        draftState.logs = []
       })
 
     default:
