@@ -6,6 +6,7 @@ import {color} from '../../styles/color'
 
 import LabelText from '../LabelText/LabelText'
 import InteractiveButton from '../InteractiveButton/InteractiveButton'
+import SearchBox from '../SearchBox/SearchBox'
 
 // {
 //   timestamp: Number,
@@ -30,9 +31,9 @@ class ConsolePanel extends React.Component{
     this.handleSearchConsoleLog = this.handleSearchConsoleLog.bind(this)
   }
 
-  handleSearchConsoleLog () {
+  handleSearchConsoleLog (searchText) {
     this.setState({
-      searchText: this.refs.consoleLogSearch.value
+      searchText: searchText
     })
   }
   
@@ -61,10 +62,13 @@ class ConsolePanel extends React.Component{
             handleClick={this.props.handleClearConsoleLog}>
             Clear
           </InteractiveButton>
-          <input className='searchBox' 
-            onKeyUp={debounce(this.handleSearchConsoleLog, 300)}
-            ref='consoleLogSearch'
-            placeholder='Search Log...' />
+          <SearchBox
+            handleSearchContentChange={debounce(this.handleSearchConsoleLog, 300)}
+            placeholder='Search Log...'
+            styleOverwrite={{
+              marginLeft: '5px'
+            }}
+          ></SearchBox>
         </div>
         <div className='consolePanelContent'>
           {logElements}
@@ -79,12 +83,12 @@ export default styled(ConsolePanel)`
   flex-direction: column;
   border: 1px solid ${color.border};
   border-top: none;
-  padding: 5px;
   overflow: hidden;
   max-height: 50%;
   transition: height 0.3s;
 
   .consolePanelToolBar {
+    flex-shrink: 0;
     border-bottom: 1px solid ${color.border};
     padding: 5px;
   }

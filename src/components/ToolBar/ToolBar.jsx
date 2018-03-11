@@ -65,6 +65,7 @@ export default styled(({
       )}
       
       <InteractiveButton 
+        buttonStyle={{marginLeft: '5px'}}
         handleClick={handleInspectBtnClick}>
         Inspect
       </InteractiveButton>

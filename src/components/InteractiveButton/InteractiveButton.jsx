@@ -3,7 +3,7 @@ import React from 'react' // eslint-disable-line no-unused-vars
 import styled from 'styled-components'
 import {color} from '../../styles/color'
 
-export default styled(({className, children, buttonStyle, handleClick}) => {
+export default styled(({className, children, styleOverwrite, handleClick}) => {
   return (
     <button className={className}
       onClick={handleClick}
@@ -14,9 +14,9 @@ export default styled(({className, children, buttonStyle, handleClick}) => {
 })`
   height: 25px;
   background-color: ${color.light};
-  margin: 0 5px;
   outline: none;
   border: 1px solid ${color.border};
+  cursor: pointer;
 
   &:hover {
     background-color: ${color.heavy};
@@ -27,5 +27,5 @@ export default styled(({className, children, buttonStyle, handleClick}) => {
     border-style: inset;
   }
 
-  ${props => props.buttonStyle}
+  ${props => props.styleOverwrite}
 `
